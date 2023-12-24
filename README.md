@@ -1,5 +1,5 @@
 # ts-event-target-anon
-EventTargetAnon extends EventTarget to add lambda noname addEventListener/
+EventTargetAnon extends EventTarget to add lambda noname addEventListener.
 
 ## Before this library:
 ```JavaScript
@@ -15,12 +15,12 @@ myInstance.removeEventListener(listener);
 ## After this library:
 ```JavaScript
 /* Add anonymous event listener. */
-let subscribableInstance = myInstance.addEventListener('message',(event)=>{
+let selfDestructInstance = myInstance.addEventListener('message',(event)=>{
     console.log("onmessage", event.detail);
 });
 
 /* unsubscribe */
-subscribableInstance.destroy();
+selfDestructInstance.destroy();
 ```
 
 
@@ -54,11 +54,11 @@ class MyClass extends EventTargetAnon
 let myInstance = new MyClass();
 
 /* Add anonymous event listener. */
-let subscribableInstance = myInstance.addEventListener('message',(event)=>{
+let selfDestructInstance = myInstance.addEventListener('message',(event)=>{
     console.log("onmessage", event.detail);
 });
 
-console.log("Subscribed = ", !subscribableInstance.isDestroyed());//>Subscribed =  true
+console.log("Subscribed = ", !selfDestructInstance.isDestroyed());//>Subscribed =  true
 
 /* listener subscribed */
 let e = new Event('message');
@@ -66,16 +66,16 @@ e.detail = {text:"Event message was sent"};
 myInstance.dispatchEvent(e);//>onmessage { text: 'Event message was sent' }
 
 /* unsubscribe */
-subscribableInstance.destroy();
+selfDestructInstance.destroy();
 
-console.log("Subscribed = ", !subscribableInstance.isDestroyed());//>Subscribed =  false
+console.log("Subscribed = ", !selfDestructInstance.isDestroyed());//>Subscribed =  false
 
 /* listener unsubscribed */
 e = new Event('message');
 e.detail = {text:"Event message was not sent"};
 myInstance.dispatchEvent(e);//> nothing do
 
-subscribableInstance.destroy();//> throws
+selfDestructInstance.destroy();//> throws
 ```
 
 #### 2. Mass unsubscribe

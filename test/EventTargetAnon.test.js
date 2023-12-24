@@ -13,8 +13,8 @@ let myInstance =  new MyClass();
 
 describe('EventTargetAnon class', () => {
 
-    const subscribableInstance = new EventTargetAnon(() => {});
-    const subscription = subscribableInstance.addEventListener('change',()=>{
+    const selfDestructInstance = new EventTargetAnon(() => {});
+    const subscription = selfDestructInstance.addEventListener('change',()=>{
 
     });
 
@@ -23,8 +23,8 @@ describe('EventTargetAnon class', () => {
         const mockEventHandler = jest.fn();
 
         /* Act */
-        const subscription = subscribableInstance.addEventListener('customEvent', mockEventHandler);
-        subscribableInstance.dispatchEvent(new Event('customEvent'));
+        const subscription = selfDestructInstance.addEventListener('customEvent', mockEventHandler);
+        selfDestructInstance.dispatchEvent(new Event('customEvent'));
 
         /* Assert */
         expect(mockEventHandler).toHaveBeenCalled();
@@ -35,9 +35,9 @@ describe('EventTargetAnon class', () => {
         const mockEventHandler = jest.fn();
 
         /* Act */
-        const subscription = subscribableInstance.addEventListener('customEvent', mockEventHandler);
+        const subscription = selfDestructInstance.addEventListener('customEvent', mockEventHandler);
         subscription.destroy();
-        subscribableInstance.dispatchEvent(new Event('customEvent'));
+        selfDestructInstance.dispatchEvent(new Event('customEvent'));
 
         /* Assert */
         expect(mockEventHandler).not.toHaveBeenCalled();

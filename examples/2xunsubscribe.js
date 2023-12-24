@@ -8,11 +8,11 @@ class MyClass extends EventTargetAnon
 
 }
 let myInstance = new MyClass();
-let subscribableInstance = myInstance.addEventListener('message',(event)=>{
+let selfDestructInstance = myInstance.addEventListener('message',(event)=>{
     console.log("onmessage",event.detail);
 });
 
-console.log("Subscribed = ", !subscribableInstance.isDestroyed());//>Subscribed =  true
+console.log("Subscribed = ", !selfDestructInstance.isDestroyed());//>Subscribed =  true
 
 /* listener subscribed */
 let e = new Event('message');
@@ -20,16 +20,16 @@ e.detail = {text:"Event message was sent"};
 myInstance.dispatchEvent(e);//>onmessage { text: 'Event message was sent' }
 
 /* unsubscribe */
-subscribableInstance.destroy();
+selfDestructInstance.destroy();
 
-console.log("Subscribed = ", !subscribableInstance.isDestroyed());//>Subscribed =  false
+console.log("Subscribed = ", !selfDestructInstance.isDestroyed());//>Subscribed =  false
 
 /* listener unsubscribed */
 e = new Event('message');
 e.detail = {text:"Event message was not sent"};
 myInstance.dispatchEvent(e);//> nothing do
 
-subscribableInstance.destroy();//> throws
+selfDestructInstance.destroy();//> throws
 
 
 
