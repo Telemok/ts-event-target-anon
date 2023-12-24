@@ -1,0 +1,23 @@
+tsc -p tsconfig.commonjs.json // compile for deprecated node.js, make .js .map .d.ts
+tsc -p tsconfig.esnext.json // compile for updated JS, make .js .map .d.ts
+
+npm test // test project
+
+node ./examples/using // run example
+node ./examples/2xunsubscribe // run example
+node ./examples/Destrash.example // run example
+
+npm install --save-dev jest
+npx jest --init //Y, jsdom,
+√ Would you like to use Typescript for the configuration file? // no, becouse TS compiled in ./dist/
+√ Choose the test environment that will be used for testing // node or jsdom, better test and node and jsdom
+√ Do you want Jest to add coverage reports? ... //no, prevent creating waste folder coveraje/
+√ Which provider should be used to instrument code for coverage? » //v8 or babel, idk what difference
+√ Automatically clear mock calls, instances, contexts and results before every test? ... //yes, clear cache = no problems
+rename jest.config.ts => jest.config.js // if no rename tsc will change dir structure in ./dist/
+don't need install if rename .ts to .js npm i --save-dev ts-node
+npm test // run test with jest
+
+Dir structure:
+.js project mix tests and .js code in one folder
+.ts project separate /src/*.ts /test/*.test.js /dist/*.js

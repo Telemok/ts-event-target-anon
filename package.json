@@ -1,0 +1,24 @@
+{
+  "name": "@telemok/ts-event-target-anon",
+  "version": "0.0.231224",
+  "description": "Typescript EventTarget extends to add lambda noname addEventListener",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "testCommonJs": "node node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Telemok/ts-event-target-anon.git"
+  },
+  "author": "Dmitrii Arshinnikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Telemok/ts-event-target-anon/issues"
+  },
+  "homepage": "https://github.com/Telemok/ts-event-target-anon#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
